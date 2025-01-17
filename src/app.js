@@ -22,17 +22,18 @@ app.use(
     credentials: true,
   })
 );
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: process.env.NODE_ENV === 'production', 
-      httpOnly: true,
-      sameSite: 'None',  //activar en produccion si los servidores son diferentes
-    },
-}));
-
+app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: true,
+      cookie: {
+        httpOnly: true, 
+        secure: true,   
+        sameSite: "None", 
+      },
+    })
+  );
 
 app.use(passport.initialize());
 app.use(passport.session());
